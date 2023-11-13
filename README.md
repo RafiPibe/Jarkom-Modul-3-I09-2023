@@ -10,7 +10,7 @@
 <h2>Prerequisites</h2>
 
 <p align="center">
-<img src="https://media.discordapp.net/attachments/1153305482438660178/1173603912352288841/image.png?ex=65648ed1&is=655219d1&hm=c3f986718f47031585bad4110d667ae376d979040b248023116dec72898808bf&=&width=1307&height=698">
+<img src="https://media.discordapp.net/attachments/1153305482438660178/1173612928054870036/image.png?ex=65649736&is=65522236&hm=d61e20dbe2710f57cbd87426734b1c89586f49ffa0036fc8a8a388544fe4a312&=&width=1200&height=701">
 </p>
 <p align="center">The Topology</p>
 
