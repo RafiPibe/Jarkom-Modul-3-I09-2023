@@ -1,6 +1,6 @@
 <h1>Jarkom-Modul-3-I09-2023</h1>
-<p>Praktikum Jaringan Komputer Modul 2 I09</p>
-<p>Computer Network Practicum 2nd Module I09</p>
+<p>Praktikum Jaringan Komputer Modul 3 I09</p>
+<p>Computer Network Practicum 3rd Module I09</p>
 
 | Name                        | NRP        |
 |-----------------------------|------------|
