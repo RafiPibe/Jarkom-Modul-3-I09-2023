@@ -1,0 +1,17 @@
+```
+nano /root/.bashrc
+```
+
+DHCP Relay
+
+```bash
+apt-get update
+apt-get install isc-dhcp-relay -y
+service isc-dhcp-relay start
+
+echo '
+  SERVERS="10.63.1.2"
+  INTERFACES="eth1 eth2 eth3 eth4"
+  OPTIONS=
+    ' > /etc/default/isc-dhcp-relay
+```
