@@ -9,7 +9,7 @@
 
 <h2>Prerequisites</h2>
 
-Since we are using a new Docker Image, we have to change the new one first. This is done by adding a new Docker container template, and filling the new docker image name with `danielcristh0/ubuntu-bionic:1.1`.
+Since we are using a new Docker Image, we have to change the new one first. This is done by adding a new Docker container template, and filling the new docker image name with `danielcristh0/debian-buster:1.1`.
 
 <p align="center">
 <img src="https://media.discordapp.net/attachments/1153305482438660178/1173612928054870036/image.png?ex=65649736&is=65522236&hm=d61e20dbe2710f57cbd87426734b1c89586f49ffa0036fc8a8a388544fe4a312&=&width=1200&height=701">
@@ -24,16 +24,24 @@ auto eth0
 iface eth0 inet dhcp
 
 auto eth1
-iface eth1 inet dhcp
+iface eth1 inet static
+	address 10.63.1.1
+	netmask 255.255.255.0
 
 auto eth2
-iface eth2 inet dhcp
+iface eth2 inet static
+	address 10.63.2.1
+	netmask 255.255.255.0
 
 auto eth3
-iface eth3 inet dhcp
+iface eth3 inet static
+	address 10.63.3.1
+	netmask 255.255.255.0
 
 auto eth4
-iface eth4 inet dhcp
+iface eth4 inet static
+	address 10.63.4.1
+	netmask 255.255.255.0
 ```
 
 <h3>Switch1 Group (10.63.1.1)</h3>
@@ -62,7 +70,7 @@ DenkenDatabaseServer
 ```bash
 auto eth0
 iface eth0 inet static
-	address 10.63.2.1
+	address 10.63.2.2
 	netmask 255.255.255.0
 	gateway 10.63.1.1
 ```
@@ -71,7 +79,7 @@ EisenLoadBalancer
 ```bash
 auto eth0
 iface eth0 inet static
-	address 10.63.2.2
+	address 10.63.2.3
 	netmask 255.255.255.0
 	gateway 10.63.1.1
 ```
