@@ -22,6 +22,7 @@ Router Network Config
 ```bash
 auto eth0
 iface eth0 inet dhcp
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.63.0.0/16
 
 auto eth1
 iface eth1 inet static
