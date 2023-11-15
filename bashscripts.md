@@ -7,6 +7,12 @@ AuraRouter (DHCP Relay)
 ```bash
 apt-get update
 apt-get install isc-dhcp-relay -y
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.63.0.0/16
+service isc-dhcp-relay start
+
+echo '
+  nameserver 192.168.122.1
+    ' > /etc/resolv.conf
 
 echo '
   SERVERS="10.63.1.2"
@@ -18,7 +24,7 @@ echo '
   net.ipv4.ip_forward=1
     ' > /etc/sysctl.conf
 
-service isc-dhcp-relay start
+service isc-dhcp-relay restart
 ```
 
 HimmelDHCPServer
@@ -57,6 +63,8 @@ echo '
     default-lease-time 600;
     max-lease-time 7200;
 } ' > /etc/dhcp/dhcpd.conf
+
+rm -r /var/run/dhcpd.pid
 
 service isc-dhcp-server stop
 service isc-dhcp-server start
