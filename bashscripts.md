@@ -50,8 +50,8 @@ echo '
     option routers 10.63.3.1;
     option broadcast-address 10.63.3.255;
     option domain-name-servers 10.63.1.3;
-    default-lease-time 600;
-    max-lease-time 7200;
+    default-lease-time 180;
+    max-lease-time 5760;
 }
 
   subnet 10.63.4.0 netmask 255.255.255.0 {
@@ -60,8 +60,8 @@ echo '
     option routers 10.63.4.1;
     option broadcast-address 10.63.4.255;
     option domain-name-servers 10.63.1.3;
-    default-lease-time 600;
-    max-lease-time 7200;
+    default-lease-time 720;
+    max-lease-time 5760;
 } ' > /etc/dhcp/dhcpd.conf
 
 rm -r /var/run/dhcpd.pid
