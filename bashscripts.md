@@ -86,41 +86,55 @@ echo nameserver 192.168.122.1 > /etc/resolv.conf
 cat /etc/resolv.conf
 apt-get update -y
 apt install bind9 -y
-service bind9 status
+
+mkdir /etc/bind/jarkom
 
 echo '
   zone "riegel.canyon.i09.com" {
     type master;
     file "/etc/bind/riegel.canyon.i09.com";
-}; ' > /etc/bind/named.conf.local
+};
 
-#zone "1.63.10.in-addr.arpa" {
-#    type master;
-#    file "/etc/bind/jarkom/1.63.10.in-addr.arpa";
-#};' > /etc/bind/named.conf.local
+  zone "granz.channel.i09.com" {
+    type master;
+  file "/etc/bind/granz.channel.i09.com";
+};' > /etc/bind/named.conf.local
 
+cp /etc/bind/db.local /etc/bind/jarkom/arjuna.i09.com
+# nano /etc/bind/jarkom/arjuna.i09.com
 echo ';
 ; BIND data file for local loopback interface
 ;
-$TTL    604800
-@       IN      SOA     riegel.canyon.i09.com. root.riegel.canyon.i09.com. (
-                        2023110101    ; Serial
-                        604800        ; Refresh
-                        86400         ; Retry
-                        2419200       ; Expire
-                        604800 )      ; Negative Cache TTL
+$TTL 604800
+@           IN      SOA     riegel.canyon.i09.com      riegel.canyon.i09.com  (
+                            2023101001          ; Serial
+                                604800          ; Refresh
+                                 86400          ; Retry
+                               2419200          ; Expiry
+                                604800 )        ; Negative Cache TTL
 ;
-@               IN      NS      riegel.canyon.i09.com.
-@               IN      A       10.63.1.3 ;
-www             IN      CNAME   riegel.canyon.i09.com. > /etc/bind/jarkom/riegel.canyon.i09.com
+@           IN      NS      riegel.canyon.i09.com.
+@           IN      A       10.63.1.3           ;
+www         IN      CNAME   riegel.canyon.i09.com.
+@           IN      AAAA    ::1' > /etc/bind/jarkom/riegel.canyon.i09.com
 
 echo '
   forwarders {
   192.168.122.1; //IP Aura
 };
   //dnssec-validation auto;
-  allow-query{any;}; > /etc/bind/named.conf.options
+  allow-query{any;};' > /etc/bind/named.conf.options
+
+echo 'options {
+    directory "/var/cache/bind";
+    //dnssec-validation auto;
+    allow-query{any;};
+
+    auth-nxdomain no;   # conform to RFC1035
+    listen-on-v6 { any; };
+};' > /etc/bind/named.conf.options
 
 service bind9 restart
+service bind9 status
 
 ```
