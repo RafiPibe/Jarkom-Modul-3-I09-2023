@@ -221,18 +221,18 @@ We need to add configuration like ```option broadcast address``` and ```option d
 subnet 10.63.3.0 netmask 255.255.255.0 {
     ...
     option broadcast-address 10.63.3.255;
-    option domain-name-servers 10.63.1.2;
+    option domain-name-servers 10.63.1.3;
     ...
 }
 
 subnet 10.63.4.0 netmask 255.255.255.0 {
     option broadcast-address 10.63.4.255;
-    option domain-name-servers 10.63.1.2;
+    option domain-name-servers 10.63.1.3;
 } 
 
 ```
 
-and use ```shell``` script 
+and insert the script for `/etc/dhcp/dhcpd.conf`
 
 ```
 
@@ -247,7 +247,7 @@ subnet 10.63.3.0 netmask 255.255.255.0 {
     range 10.63.3.64 10.63.3.80;
     option routers 10.63.3.0;
     option broadcast-address 10.63.3.255;
-    option domain-name-servers 10.63.1.2;
+    option domain-name-servers 10.63.1.3;
 }
 
 subnet 10.63.4.0 netmask 255.255.255.0 {
@@ -255,7 +255,7 @@ subnet 10.63.4.0 netmask 255.255.255.0 {
     range 10.63.4.160 10.63.4.168;
     option routers 10.63.4.0;
     option broadcast-address 10.63.4.255;
-    option domain-name-servers 10.63.1.2;
+    option domain-name-servers 10.63.1.3;
 } ' > /etc/dhcp/dhcpd.conf
 
 service isc-dhcp-server start
@@ -275,7 +275,7 @@ echo '# Defaults for isc-dhcp-relay initscript
 #
 
 # What servers should the DHCP relay forward requests to?
-SERVERS="10.63.1.1"
+SERVERS="10.63.1.2"
 
 # On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
 INTERFACES="eth1 eth2 eth3 eth4"
@@ -287,7 +287,13 @@ service isc-dhcp-relay start
 
 ```
 
-After all the process, uncomment ```net.ipv4.ip_forward=1``` in the ```/etc/sysctl.conf``` file. 
+After all the process, uncomment ```net.ipv4.ip_forward=1``` in the ```/etc/sysctl.conf``` file. Or as we do it, we put it into the script as follows
+
+```bash
+echo '
+  net.ipv4.ip_forward=1
+    ' > /etc/sysctl.conf
+```
 
 <h2>Problem 5</h2>
 
